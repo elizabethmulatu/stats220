@@ -30,6 +30,12 @@ A meme that captures how I currently feel about my university studies is ![](htt
 
 
 
-##### Letterboxd is a website which has reviews for the movies I have watched you can access it
+##### Letterboxd is a website which has reviews for the movies I have watched. 
+You can access it
 [here](https://letterboxd.com/)
-
+#### My own Letterboxd is [here](https://letterboxd.com/eliza606eth/)
+***My four favourite listed movies are***
+1. Love Jones  *1997*
+2. Belly *1998*
+3. Ponyo *2008*
+4. How to lose a guy in 10 days *2003*
