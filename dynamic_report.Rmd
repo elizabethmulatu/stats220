@@ -1,27 +1,149 @@
 ---
-title: My dynamic report
+title: "My dynamic report"
 output: html_fragment
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
 
+library(tidyverse)
+library(magick)
+
+
 ```
+
+
 
 ```{css}
-
+.dynamic-comment {
+background-color: lightpink;
+             }
+body {
+     background-color:lightblue;
+    }   
 ```
 
-## What's going on with this data?
+```{r banner, echo=FALSE,out.width='100%'}
 
-You need to change the contents of this Rmd! Replace the R code and markdown give below in this template document.
+
+# public transport images for header
+
+img1 <- image_read("train_image.jpg")
+
+img2 <- image_read("bus_image.png")
+
+# image resize for header 
+img1 <- image_resize(img1, "600x")   # height 600px
+img2 <- image_resize(img2, "600x")
+
+
+# Combine side-by-side
+combined <- image_append(c(img1, img2))
+combined
+```
+
+
 
 ```{r}
-pets <- c("cat", "dog", "turtle", "rabbit")
-best_pet <- pets[1]
+ logged_data <- 
+  read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQYGExy9W6fvAkpM0dOwyXbS2WUJt9UC_dQbsco_SzreXDE7eLLRL6Vv6IG-8BD-xLRYYAzGiQvRYl1/pub?gid=1667279551&single=true&output=csv")
 
+ # logged_data using the rename() function, 
+# as part of creating a new data frame named latest_data.
+ 
+ # Rename the variables to create new df named latest data
+ latest_data <- logged_data %>%
+   rename(transport_to_uni = `What method of public transport did you take to university today?`,
+     commute_to_uni_minutes = `How long did your trip to university take today (in minutes)?`,
+     transport_from_uni = `What method of  transport did you take after leaving university today?`,
+     commute_from_uni_minutes = `How long did your trip take from university? (in minutes)`,
+     day = `What day of the week is this observation for?`,
+     delay = `Was your public transport delayed today? (select all that apply)`,
+     student_status = `Which of the following apply to you?`
+       )
+  
+ 
+# Bar chart 1 What is the most common commute method to univeristy
+latest_data %>%
+  ggplot(aes(x = transport_from_uni, fill = transport_from_uni)) +
+  theme_light() +
+  geom_bar() +
+  scale_fill_manual(values = c(
+    "bus" = "#FF69B4",
+    "train" = "#32CD32",
+    "both bus and train" = "#1E90FF" 
+  )) +
+  labs(
+    title = "Transport methods to University",
+    subtitle = "What is the most common commute method?",
+    x = "Transport Type",
+    y = "Number of Students"
+  )
+
+
+#Bar Chart 2, When are public transport delays most common for university students?
+latest_data %>%
+           ggplot() +
+           theme_light()+
+           geom_bar(aes(x = delay, fill = delay)) + 
+           # bar chart
+           scale_fill_manual(values = c(   # manual colour assignment, saw this one online
+             "yes (leaving university)" = "#FFC0CB",
+             "yes (going to university)" = "#90EE90",
+             "yes (going to university), yes (leaving university)" = "lightblue",
+             "no" = "lightyellow")) +
+           labs(
+             title = "To and From University",
+             subtitle = "When are public transport delays most common for university students?",
+             x = "Delay",
+             y = "University Student Observations"
+                 )
+
+#Bar Chart 3 Time it takes for students to arrive  on campus via public transport"
+latest_data %>%
+     ggplot() +
+    theme_light()+
+    geom_bar(aes(y = commute_to_uni_minutes),
+    fill = "#FFC0CB") + 
+    labs(
+    title = "Commute Time to University in Minutes",
+    subtitle = "Time it takes for students to arrive  on campus via public transport",
+    x = "University Student Observations",
+    y = "Minutes"
+    )
+  min_commute_from <-    min(latest_data$commute_from_uni_minutes)
+  
+  
+   #dynamic comments of summary stats
+ 
+  
 ```
 
-The best pet to have is a `r best_pet` of course!
+## Dynamic Comments of Summary Statistics
+  
 
-![](https://c.tenor.com/-qBsG1HwR4oAAAAC/tenor.gif)
+
+The longest commute time from university in minutes reported by the students who completed the survey was `r max(latest_data$commute_from_uni_minutes)`.
+
+The longest commute time to university in minutes reported by the students who completed the survey was `r min(latest_data$commute_to_uni_minutes)`.
+
+
+
+```{r}
+num_students <-nrow(latest_data)
+mean_commute <- latest_data$commute_to_uni_minutes %>% mean(na.rm = TRUE) %>% round(1)
+mean_commute
+``` 
+
+The mean_commute time to Univeristy in minutes reported by University students who completed the survey was `r latest_data$commute_to_uni_minutes %>% mean(na.rm = TRUE) %>% round(1)`.
+
+## What is this dyanmic report tracking?
+This dynamic report is tracking observations of commute to and from university students who take public transport in Auckland. 
+## What's going on with this data?
+My dynamic report is tracking the differences in public transport commute methods from university students. I wanted to see if  taking the bus or train ,length of commute and delays may impact how frequently students travel to and from university.
+
+## The nature of your data : What am I analysing?
+I am analsysing commute and transport habit as for university students I am doing this through a google form which  I told my friends about and I filled in with my own observations. I had deisgned to form for observation/ submission to reflect a whole day commute to and back from univeirsty
+
+
+
