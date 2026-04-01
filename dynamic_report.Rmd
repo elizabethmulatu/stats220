@@ -126,9 +126,9 @@ latest_data %>%
   
 
 
-The longest commute time from university in minutes reported by the students who completed the survey was `r max(latest_data$commute_from_uni_minutes, na.rm = TRUE)`.
+The longest commute time from University in minutes reported by the students who completed the survey was `r max(latest_data$commute_from_uni_minutes, na.rm = TRUE)`.
 
-The longest commute time to university in minutes reported by the students who completed the survey was `r max(latest_data$commute_to_uni_minutes, na.rm = TRUE)`.
+The longest commute time to University in minutes reported by the students who completed the survey was `r max(latest_data$commute_to_uni_minutes, na.rm = TRUE)`.
 
 
 
