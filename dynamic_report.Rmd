@@ -134,7 +134,7 @@ The longest commute time to University in minutes reported by the students who c
 
 
 
-The mean_commute time to Univeristy in minutes reported by University students who completed the survey was `r latest_data$commute_to_uni_minutes %>% mean(na.rm = TRUE) %>% round(1)`.
+The mean_commute time to University in minutes reported by University students who completed the survey was `r latest_data$commute_to_uni_minutes %>% mean(na.rm = TRUE) %>% round(1)`.
 
 ## What is this dynamic report tracking?
 
