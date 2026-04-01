@@ -28,13 +28,13 @@ body {
 
 # public transport images for header
 
-  img1 <- image_read("train_image.jpg")
+  img1 <- image_read("https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Auckland_AT_Metro_AM_Class%2C_Takaanini_%2820240202b%29_%28cropped%29.jpg/1920px-Auckland_AT_Metro_AM_Class%2C_Takaanini_%2820240202b%29_%28cropped%29.jpg")
 
-  img2 <- image_read("bus_image.png")
+  img2 <- image_read("https://ourauckland.aucklandcouncil.govt.nz/media/fvxla52b/bus.jpg?width=1360&v=1d762370b138170")
 
 # image resize for header 
-   img1 <- image_resize(img1, "600x")   # height 600px
-   img2 <- image_resize(img2, "600x")
+   img1 <- image_resize(img1, "700x")   # height 600px
+   img2 <- image_resize(img2, "645x")
 
 
 # Combine side-by-side
