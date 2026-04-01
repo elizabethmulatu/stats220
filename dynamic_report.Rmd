@@ -126,17 +126,13 @@ latest_data %>%
   
 
 
-The longest commute time from university in minutes reported by the students who completed the survey was `r max(latest_data$commute_from_uni_minutes)`.
+The longest commute time from university in minutes reported by the students who completed the survey was `r max(latest_data$commute_from_uni_minutes, na.rm = TRUE)`.
 
-The longest commute time to university in minutes reported by the students who completed the survey was `r min(latest_data$commute_to_uni_minutes)`.
+The longest commute time to university in minutes reported by the students who completed the survey was `r max(latest_data$commute_to_uni_minutes, na.rm = TRUE)`.
 
 
 
-```{r}
-num_students <-nrow(latest_data)
-mean_commute <- latest_data$commute_to_uni_minutes %>% mean(na.rm = TRUE) %>% round(1)
-mean_commute
-``` 
+
 
 The mean_commute time to Univeristy in minutes reported by University students who completed the survey was `r latest_data$commute_to_uni_minutes %>% mean(na.rm = TRUE) %>% round(1)`.
 
